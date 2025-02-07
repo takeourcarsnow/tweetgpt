@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate Twitter-style tweets with AI using TweetGPT">
+    <title>TweetGPT - AI Tweet Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="theme-toggle" aria-label="Toggle Theme" role="button" tabindex="0">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>🤖 TweetGPT 🐦</h1>
+            <p class="subtitle">AI-Powered Tweet Generator</p>
+        </header>
+
+        <main>
+            <div class="tweet-card">
+                <div class="tweet-header">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=anon" alt="Profile Picture" class="profile-pic">
+                    <div class="user-info">
+                        <div class="name-container">
+                            <span class="display-name">Crypto Whale</span>
+                            <span class="verified-badge">✓</span>
+                        </div>
+                        <span class="username">@crypto_whale</span>
+                    </div>
+                    <span class="tweet-time">now</span>
+                </div>
+
+                <div class="tweet-content">
+                    <div id="generated-tweet" class="tweet-text">Generate your first tweet...</div>
+                </div>
+
+                <div class="tweet-stats">
+                    <span class="stat-item" aria-label="Likes"><i class="far fa-heart"></i> <span id="likes">0</span></span>
+                    <span class="stat-item" aria-label="Retweets"><i class="fas fa-retweet"></i> <span id="retweets">0</span></span>
+                    <span class="stat-item" aria-label="Replies"><i class="far fa-comment"></i> <span id="replies">0</span></span>
+                </div>
+            </div>
+
+            <div class="tweet-history">
+                <h3>History</h3>
+                <div id="history-list" class="history-list"></div>
+            </div>
+
+            <div class="controls">
+                <div class="carousel-container">
+                    <h3>Tweet Type:</h3>
+                    <div class="carousel-wrapper">
+                        <button class="carousel-arrow left" aria-label="Scroll Left">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="carousel" id="tweet-type-carousel" aria-label="Tweet Type Carousel">
+                            <button class="carousel-item active" data-value="bullish">🟢 Bullish</button>
+                            <button class="carousel-item" data-value="bearish">🔴 Bearish</button>
+                            <button class="carousel-item" data-value="shill">🚀 Shill</button>
+                            <button class="carousel-item" data-value="prediction">📊 Prediction</button>
+                            <button class="carousel-item" data-value="alpha">🤫 Alpha</button>
+                            <button class="carousel-item" data-value="cope">😤 Copium</button>
+                            <button class="carousel-item" data-value="news">📰 News</button>
+                            <button class="carousel-item" data-value="flex">💪 Flex</button>
+                        </div>
+                        <button class="carousel-arrow right" aria-label="Scroll Right">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="carousel-container">
+                    <h3>Personality:</h3>
+                    <div class="carousel-wrapper">
+                        <button class="carousel-arrow left" aria-label="Scroll Left">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="carousel" id="personality-carousel" aria-label="Personality Carousel">
+                            <button class="carousel-item active" data-value="degen">🎰 Degen</button>
+                            <button class="carousel-item" data-value="influencer">🎭 Influencer</button>
+                            <button class="carousel-item" data-value="trader">📈 Trader</button>
+                            <button class="carousel-item" data-value="researcher">🔬 Researcher</button>
+                            <button class="carousel-item" data-value="whale">🐋 Whale</button>
+                            <button class="carousel-item" data-value="newbie">👶 Newbie</button>
+                        </div>
+                        <button class="carousel-arrow right" aria-label="Scroll Right">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="crypto-selector">
+                    <h3>Choose Crypto:</h3>
+                    <div class="crypto-grid">
+                        <div class="top-cryptos">
+                            <button class="crypto-chip active" data-ticker="BTC">Bitcoin ₿</button>
+                            <button class="crypto-chip" data-ticker="ETH">Ethereum Ξ</button>
+                            <button class="crypto-chip" data-ticker="SOL">Solana ◎</button>
+                            <button class="crypto-chip" data-ticker="DOGE">Dogecoin Ð</button>
+                            <button class="crypto-chip" data-ticker="XRP">XRP ✕</button>
+                            <button class="crypto-chip" data-ticker="ADA">Cardano ₳</button>
+                            <button class="crypto-chip" data-ticker="AVAX">Avalanche ⏫</button>
+                            <button class="crypto-chip" data-ticker="DOT">Polkadot ●</button>
+                            <button class="crypto-chip" data-ticker="LINK">Chainlink 🔗</button>
+                            <button class="crypto-chip" data-ticker="SHIB">Shiba Inu 🐕</button>
+                            <button class="crypto-chip" data-ticker="MATIC">Polygon ⬣</button>
+                            <button class="crypto-chip" data-ticker="BNB">Binance Coin Ⓝ</button>
+                            <button class="crypto-chip" data-ticker="LTC">Litecoin Ł</button>
+                            <button class="crypto-chip" data-ticker="ATOM">Cosmos ⚛</button>
+                            <button class="crypto-chip" data-ticker="UNI">Uniswap ⚖</button>
+                            <button class="crypto-chip" data-ticker="TRX">Tron ⚡</button>
+                            <button class="crypto-chip" data-ticker="XLM">Stellar ✨</button>
+                            <button class="crypto-chip" data-ticker="ALGO">Algorand ⚙</button>
+                            <button class="crypto-chip" data-ticker="VET">VeChain Ⓥ</button>
+                            <button class="crypto-chip" data-ticker="MANA">Decentraland 🏰</button>
+                        </div>
+                        <div class="custom-crypto">
+                            <input type="text" id="custom-crypto" placeholder="Enter custom ticker..." aria-label="Custom Crypto Ticker">
+                            <button id="add-crypto" class="secondary-button" aria-label="Add Custom Crypto">
+                                <i class="fas fa-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tweet-length-container">
+                    <h3>Tweet Length:</h3>
+                    <div class="tweet-length-slider">
+                        <input type="range" id="tweet-length" min="1" max="3" value="2" step="1">
+                        <div class="tweet-length-labels">
+                            <span>Short</span>
+                            <span>Medium</span>
+                            <span>Long</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="connect-wallet-btn" class="secondary-button" aria-label="Connect Wallet">
+                    <i class="fas fa-wallet"></i> Connect Wallet
+                </button>
+
+                <button id="generate-btn" class="primary-button" aria-label="Generate Tweet">
+                    <span>Generate Tweet</span>
+                    <i class="fas fa-bolt"></i>
+                </button>
+
+                <div class="action-buttons">
+                    <button id="copy-btn" class="secondary-button" aria-label="Copy Tweet">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <button id="share-btn" class="secondary-button" aria-label="Share Tweet">
+                        <i class="fas fa-share"></i> Share
+                    </button>
+                    <button id="save-image-btn" class="secondary-button">
+                        <i class="fas fa-image"></i> Save as Image
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast" role="alert" aria-live="assertive"></div>
+
+    <!-- Scripts loaded at the end for better performance -->
+    <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/CryptoTweetGenerator.js"></script>
+    <script src="js/eventListeners.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+</html>
